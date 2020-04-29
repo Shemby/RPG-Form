@@ -18,5 +18,8 @@
     "Dragons"
   ],
   "author": "Samuel Hemby",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.5.6"
+  }
 }
