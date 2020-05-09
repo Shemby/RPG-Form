@@ -4,7 +4,8 @@
   "description": "A dynamic form system for rpg forms",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,8 +21,15 @@
   "author": "Samuel Hemby",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "mongodb": "^3.5.6",
     "mongoose": "^5.9.12",
+    "mongoose-unique-validator": "^2.0.3",
     "validator": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
   }
 }
