@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
+// const User = require("./User");
 
-const thirdSchema = mongoose.Schema({
+const sheetSchema = mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  viewers: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   player: {
     type: String,
     required: true,
@@ -99,4 +108,4 @@ const thirdSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Third", thirdSchema);
+module.exports = mongoose.model("Sheet", sheetSchema);

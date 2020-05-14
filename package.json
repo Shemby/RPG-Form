@@ -4,8 +4,9 @@
   "description": "A dynamic form system for rpg forms",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "dev": "concurrently \"npm run server\" \"npm run front-end\"",
+    "server": "nodemon src/index.js",
+    "front-end": "npm start --prefix front-end"
   },
   "repository": {
     "type": "git",
@@ -24,12 +25,14 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.6",
     "mongoose": "^5.9.12",
     "mongoose-unique-validator": "^2.0.3",
     "validator": "^13.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "concurrently": "^5.2.0"
   }
 }
