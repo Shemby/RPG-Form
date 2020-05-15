@@ -6,11 +6,11 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 //create a sheet and assign to a given user
-router.post("/user/:id", auth, async (req, res) => {
+router.post("/user/sheets", auth, async (req, res) => {
   const sheet = new Sheet(req.body);
   try {
-    await User.findOneAndUpdate(
-      { _id: req.params.id },
+    await User.updateOne(
+      { _id: req.user._id },
       { $push: { sheets: sheet } },
       { new: true }
     );
@@ -23,36 +23,29 @@ router.post("/user/:id", auth, async (req, res) => {
 });
 
 //read all sheets for a given user
-router.get("/user/:id/sheets", auth, async (req, res) => {
+router.get("/user/sheets", auth, async (req, res) => {
   try {
-    User.findById(req.params.id)
-      .populate("sheets")
-      .exec()
-      .then((user) => {
-        if (!user) {
-          return res.status(404).send("no such user");
-        }
-        res.send(user.sheets);
-      });
+    const user = await User.findById(req.user._id).populate("sheets").exec();
+    res.send(user.sheets);
   } catch (e) {
-    res.status(500).send();
+    res.status(500).send(e);
   }
 });
 
 //read a specific sheet for a given user
-router.get("/user/:id/:sheet", auth, async (req, res) => {
+router.get("/user/sheets/:id", auth, async (req, res) => {
   try {
-    const sheet = await Sheet.findById(req.params.sheet);
-    res.send(sheet);
+    const sheet = await Sheet.findById(req.params.id);
+    res.json(sheet);
   } catch (e) {
     res.status(500).send();
   }
 });
 
 //update specific sheet for a given user
-router.patch("/user/:id/:sheet", auth, async (req, res) => {
+router.patch("/user/sheets/:id", auth, async (req, res) => {
   try {
-    const sheet = await Sheet.findByIdAndUpdate(req.params.sheet, req.body, {
+    const sheet = await Sheet.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     res.send(sheet);
@@ -62,14 +55,14 @@ router.patch("/user/:id/:sheet", auth, async (req, res) => {
 });
 
 //delete specific sheet for a given user
-router.delete("/user/:id/:sheet", auth, async (req, res) => {
+router.delete("/user/sheets/:id", auth, async (req, res) => {
   try {
-    await User.findOneAndUpdate(
-      { _id: req.params.id },
-      { $pull: { sheets: req.params.sheet } },
+    await User.updateOne(
+      { _id: req.user._id },
+      { $pull: { sheets: req.params.id } },
       { multi: true }
     );
-    await Sheet.findByIdAndDelete(req.params.sheet);
+    await Sheet.findByIdAndDelete(req.params.id);
     res.send(`1 item was deleted`);
   } catch (e) {
     res.status(500).send();
