@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default class Navigation extends Component {
   render() {
     return (
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="/" exact>
+      <nav>
+        <Link exact to="/">
           3.5 Sheets
-        </Navbar.Brand>
-        <Nav className="mr-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/sheet">Sheets</Nav.Link>
-          <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-        </Nav>
-      </Navbar>
+        </Link>
+        <Link exact to="/">
+          Login
+        </Link>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/sheet">Sheet</Link>
+      </nav>
     );
   }
 }

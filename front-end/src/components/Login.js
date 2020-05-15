@@ -1,42 +1,31 @@
 import React, { Component } from "react";
-import {
-  InputGroup,
-  FormControl,
-  Container,
-  Row,
-  Col,
-  Button,
-} from "react-bootstrap";
+import Axios from "axios";
 
 class Login extends Component {
+  constructor() {
+    super();
+    this.formSubmit = this.formSubmit.bind(this);
+  }
+  async formSubmit(e) {
+    e.preventDefault();
+    const options = {
+      method: "POST",
+      url: "http://localhost:3000/user/login",
+      body: {
+        email: this.refs.email.value,
+        password: this.refs.pass.value,
+      },
+    };
+    await Axios(options);
+    console.log("we did it bois");
+  }
   render() {
     return (
-      <Container fluid="sm" className="justify-content-md-center">
-        <Row className="justify-content-md-center">
-          <Col xs lg="8">
-            <InputGroup className="mb-3">
-              <FormControl placeholder="Username" aria-label="Username" />
-            </InputGroup>
-          </Col>
-        </Row>
-
-        <Row className="justify-content-md-center">
-          <Col xs lg="8">
-            <InputGroup className="mb-3">
-              <FormControl
-                placeholder="Password"
-                aria-label="Password"
-                type="password"
-              />
-            </InputGroup>
-          </Col>
-        </Row>
-        <Row className="justify-content-md-center">
-          <Button variant="primary" type="submit" lg="8">
-            Submit
-          </Button>
-        </Row>
-      </Container>
+      <form onSubmit={this.formSubmit}>
+        <input type="email" placeholder="Email" ref="email" />
+        <input type="password" placeholder="Password" ref="pass" />
+        <button type="submit">Sign In</button>
+      </form>
     );
   }
 }
