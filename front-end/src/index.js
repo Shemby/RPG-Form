@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import Navigation from "./components/Nav";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import Sheet from "./components/Sheet";
 
 class App extends Component {
   state = { users: [] };
@@ -10,15 +16,14 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Users</h1>
-        <ul>
-          {" "}
-          {this.state.users.map((user) => (
-            <li key={user.id}>{user.name}</li>
-          ))}{" "}
-        </ul>
-      </div>
+      <Router>
+        <Navigation />
+        <Switch>
+          <Route path="/" exact component={Login}></Route>
+          <Route path="/sheet" component={Sheet}></Route>
+          <Route path="/dashboard" component={Dashboard}></Route>
+        </Switch>
+      </Router>
     );
   }
 }
