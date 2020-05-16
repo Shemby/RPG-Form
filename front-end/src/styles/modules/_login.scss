@@ -1,0 +1,15 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: auto;
+  margin-top: 15%;
+  align-items: center;
+  &-field {
+    width: 60%;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding-left: 5px;
+  }
+}

@@ -1,18 +1,47 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-export default class Navigation extends Component {
+export default class Nav extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isAuthenticated: false,
+    };
+  }
+  componentDidUpdate() {
+    this.setState({
+      isAuthenticated: localStorage.getItem("isAuthenticated"),
+    });
+  }
   render() {
+    let isLogged;
+    if (!this.state.isAuthenticated) {
+      isLogged = (
+        <div className="right">
+          <NavLink className="nav-link " to="/login">
+            Login
+          </NavLink>
+          <NavLink className="nav-link" to="/signup">
+            Sign Up
+          </NavLink>
+        </div>
+      );
+    } else {
+      isLogged = (
+        <NavLink className="nav-link right" to="/logout">
+          Logout
+        </NavLink>
+      );
+    }
     return (
-      <nav>
-        <Link exact to="/">
+      <nav className="nav">
+        <NavLink className="nav-link" to="/">
           3.5 Sheets
-        </Link>
-        <Link exact to="/">
-          Login
-        </Link>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/sheet">Sheet</Link>
+        </NavLink>
+        <NavLink className="nav-link" to="/dashboard">
+          Dashboard
+        </NavLink>
+        {isLogged}
       </nav>
     );
   }

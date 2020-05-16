@@ -19,7 +19,6 @@ router.post("/user", async (req, res) => {
 
 //login user
 router.post("/user/login", async (req, res) => {
-  console.log(req.body);
   try {
     const user = await User.findByCredentials(
       req.body.email,
@@ -46,22 +45,9 @@ router.post("/user/logout", auth, async (req, res) => {
 });
 
 //Read user profile
-router.get("/user/profile", auth, async (req, res) => {
+router.get("/user/profile", auth, (req, res) => {
   res.send(req.user);
 });
-
-// //Read Specific User
-// router.get("/user/:id", auth, async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.id);
-//     if (!user) {
-//       return res.status(404).send();
-//     }
-//     res.send(user);
-//   } catch (e) {
-//     res.status(500).send();
-//   }
-// });
 
 //Update Specific User
 router.patch("/user/profile", auth, async (req, res) => {

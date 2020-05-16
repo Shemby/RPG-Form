@@ -7,6 +7,9 @@ import Nav from "./components/Nav";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Sheet from "./components/Sheet";
+import Logout from "./components/Logout";
+import Singup from "./components/Signup";
+import Signup from "./components/Signup";
 
 class App extends Component {
   render() {
@@ -14,9 +17,11 @@ class App extends Component {
       <Router>
         <Nav />
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" component={Singup} />
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/sheet" component={Sheet} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
         </Switch>
       </Router>
     );

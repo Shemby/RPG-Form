@@ -1,15 +1,20 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 export default class Sheet extends Component {
-  constructor() {
-    super();
-    this.state = { user: "some user" };
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: localStorage.getItem("token"),
+      header: localStorage.getItem("Authorization"),
+    };
   }
-  componentDidMount() {
-    axios.get("localhost:5000/user/profile");
-  }
+
   render() {
-    return <div>Sheet</div>;
+    return (
+      <div>
+        <h3>{`${this.props.sheet.name} is a`}</h3>
+        <h2>{this.props.sheet.class}</h2>
+      </div>
+    );
   }
 }
