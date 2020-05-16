@@ -45,9 +45,9 @@ export default class Dashboard extends Component {
     const sheets = this.state.sheets.map((sheet) => {
       return (
         <li key={sheet._id}>
-          <a href="#" onClick={() => this.setState({ currentSheet: sheet })}>
+          <button onClick={() => this.setState({ currentSheet: sheet })}>
             {sheet.name}
-          </a>
+          </button>
         </li>
       );
     });

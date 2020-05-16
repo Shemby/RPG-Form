@@ -2,14 +2,6 @@ const mongoose = require("mongoose");
 // const User = require("./User");
 
 const sheetSchema = mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-  viewers: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
   player: {
     type: String,
     required: true,
@@ -92,10 +84,13 @@ const sheetSchema = mongoose.Schema({
     type: Number,
   },
   armor: {
-    type: Number,
+    type: String,
   },
   shield: {
-    type: Number,
+    type: String,
+  },
+  weapon: {
+    type: String,
   },
   nat: {
     type: Number,

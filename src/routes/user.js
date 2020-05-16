@@ -1,5 +1,6 @@
 const express = require("express");
 const User = require("../models/User");
+const Sheet = require("../models/Sheet");
 const auth = require("../middleware/auth");
 
 const router = express.Router();
@@ -49,7 +50,7 @@ router.get("/user/profile", auth, (req, res) => {
   res.send(req.user);
 });
 
-//Update Specific User
+//Update User
 router.patch("/user/profile", auth, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["name", "username", "email", "password"];
@@ -74,10 +75,16 @@ router.patch("/user/profile", auth, async (req, res) => {
   }
 });
 
-//Delete Specific User
+//Delete User
 router.delete("/user/profile", auth, async (req, res) => {
   try {
-    req.user.remove();
+    await req.user.sheets.forEach((sheet) => {
+      Sheet.deleteOne({ _id: sheet }, function (err) {
+        if (err) console.log(err);
+        console.log("gottem");
+      });
+    });
+    await req.user.remove();
     res.send(`${req.user.name} has been removed`);
   } catch (e) {
     res.status(500).send();

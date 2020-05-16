@@ -2,20 +2,9 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
 export default class Nav extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isAuthenticated: false,
-    };
-  }
-  componentDidUpdate() {
-    this.setState({
-      isAuthenticated: localStorage.getItem("isAuthenticated"),
-    });
-  }
   render() {
     let isLogged;
-    if (!this.state.isAuthenticated) {
+    if (!this.props.isAuth) {
       isLogged = (
         <div className="right">
           <NavLink className="nav-link " to="/login">

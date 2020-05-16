@@ -1,28 +1,20 @@
 import React, { Component } from "react";
-import Axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor() {
     super();
     this.formSubmit = this.formSubmit.bind(this);
   }
+
   formSubmit(e) {
     e.preventDefault();
-    const options = {
-      method: "POST",
-      url: "http://localhost:3000/user/login",
-      data: {
-        email: this.refs.email.value,
-        password: this.refs.pass.value,
-      },
-    };
-    Axios(options).then((res) => {
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("Authorization", `Bearer ${res.data.token}`);
-      localStorage.setItem("isAuthenticated", true);
-    });
+    this.props.loginFunc(this.refs.email.value, this.refs.pass.value);
   }
   render() {
+    if (this.props.redirect === "/dashboard") {
+      return <Redirect to={this.props.redirect} />;
+    }
     return (
       <form className="login" onSubmit={this.formSubmit}>
         <input

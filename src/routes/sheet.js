@@ -5,7 +5,7 @@ const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-//create a sheet and assign to a given user
+//create sheet
 router.post("/user/sheets", auth, async (req, res) => {
   const sheet = new Sheet(req.body);
   try {
@@ -22,7 +22,7 @@ router.post("/user/sheets", auth, async (req, res) => {
   }
 });
 
-//read all sheets for a given user
+//read all sheets
 router.get("/user/sheets", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user._id).populate("sheets").exec();
@@ -32,17 +32,17 @@ router.get("/user/sheets", auth, async (req, res) => {
   }
 });
 
-//read a specific sheet for a given user
+//read sheet
 router.get("/user/sheets/:id", auth, async (req, res) => {
   try {
     const sheet = await Sheet.findById(req.params.id);
-    res.json(sheet);
+    res.send(sheet);
   } catch (e) {
     res.status(500).send();
   }
 });
 
-//update specific sheet for a given user
+//update sheet
 router.patch("/user/sheets/:id", auth, async (req, res) => {
   try {
     const sheet = await Sheet.findByIdAndUpdate(req.params.id, req.body, {
@@ -54,7 +54,7 @@ router.patch("/user/sheets/:id", auth, async (req, res) => {
   }
 });
 
-//delete specific sheet for a given user
+//delete sheet
 router.delete("/user/sheets/:id", auth, async (req, res) => {
   try {
     await User.updateOne(

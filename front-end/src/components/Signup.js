@@ -7,7 +7,6 @@ export default class Signup extends Component {
     super();
     this.formSubmit = this.formSubmit.bind(this);
     this.state = {
-      isAuthenticated: false,
       redirect: false,
       password: null,
       confirmPassword: null,
@@ -29,7 +28,8 @@ export default class Signup extends Component {
       Axios(options).then((res) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("Authorization", `Bearer ${res.data.token}`);
-        this.setState({ isAuthenticated: true, redirect: "/" });
+        localStorage.setItem("isAuthenticated", true);
+        this.setState({ redirect: "/" });
       });
     } else {
       alert("Passwords do not match");

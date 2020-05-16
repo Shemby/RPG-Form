@@ -14,6 +14,7 @@ export default class Sheet extends Component {
       <div>
         <h3>{`${this.props.sheet.name} is a`}</h3>
         <h2>{this.props.sheet.class}</h2>
+        <button>Create a new Sheet</button>
       </div>
     );
   }
