@@ -16,15 +16,15 @@ class Login extends Component {
       return <Redirect to={this.props.redirect} />;
     }
     return (
-      <form className="login" onSubmit={this.formSubmit}>
+      <form className="form" onSubmit={this.formSubmit}>
         <input
-          className="login-field"
+          className="form-field"
           type="email"
           placeholder="Email"
           ref="email"
         />
         <input
-          className="login-field"
+          className="form-field"
           type="password"
           placeholder="Password"
           ref="pass"

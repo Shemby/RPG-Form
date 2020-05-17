@@ -1,20 +1,36 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Nav from "./Nav";
+import BasicInfo from "./BasicInfo";
+import Abilities from "./Abilities";
+import Morality from "./Morality";
+import Depth from "./Depth";
+import Equipment from "./Equipment";
+import Review from "./Review";
 
 export default class index extends Component {
   constructor() {
     super();
+    this.handleChange = this.handleChange.bind(this);
+    this.nextStep = this.nextStep.bind(this);
+    this.prevStep = this.prevStep.bind(this);
+    this.display = this.display.bind(this);
+    this.navigate = this.navigate.bind(this);
     this.state = {
+      step: 1,
+
       //step 1 basic info
       race: "",
       class: "",
 
       //step 2 abilities
-      str: 0,
-      dex: 0,
-      con: 0,
-      int: 0,
-      wis: 0,
-      cha: 0,
+      str: "",
+      dex: "",
+      con: "",
+      int: "",
+      wis: "",
+      cha: "",
 
       //step 3 morality and religion
       alignment: "",
@@ -22,10 +38,10 @@ export default class index extends Component {
 
       //step 4 in depth desc
       name: "",
-      age: 0,
+      age: "",
       gender: "",
-      height: 0,
-      weight: 0,
+      height: "",
+      weight: "",
       eyes: "",
       hair: "",
       skin: "",
@@ -37,10 +53,57 @@ export default class index extends Component {
     };
   }
 
+  handleChange = (input) => (e) => {
+    this.setState({ [input]: e.target.value });
+  };
+
+  nextStep() {
+    this.setState({ step: this.state.step + 1 });
+  }
+
+  prevStep() {
+    this.setState({ step: this.state.step - 1 });
+  }
+
+  display() {
+    const { step } = this.state;
+    if (step == 1) {
+      return (
+        <BasicInfo handleChange={this.handleChange} character={this.state} />
+      );
+    } else if (step == 2) {
+      return (
+        <Abilities handleChange={this.handleChange} character={this.state} />
+      );
+    } else if (step == 3) {
+      return (
+        <Morality handleChange={this.handleChange} character={this.state} />
+      );
+    } else if (step == 4) {
+      return <Depth handleChange={this.handleChange} character={this.state} />;
+    } else if (step == 5) {
+      return (
+        <Equipment handleChange={this.handleChange} character={this.state} />
+      );
+    } else if (step == 6) {
+      return <Review character={this.state} character={this.state} />;
+    }
+  }
+
+  navigate(num) {
+    if (num !== this.state.step) {
+      this.setState({
+        step: num,
+      });
+      this.display();
+    }
+  }
+
   render() {
     return (
       <div>
-        <h2></h2>
+        <Nav navigate={this.navigate} />
+        {this.display()}
       </div>
     );
   }

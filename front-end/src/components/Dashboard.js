@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 
+import Creator from "./create";
 import Sheet from "./Sheet";
 
 export default class Dashboard extends Component {
@@ -12,6 +13,7 @@ export default class Dashboard extends Component {
       user: null,
       sheets: [],
       currentSheet: {},
+      create: false,
     };
   }
   async componentDidMount() {
@@ -56,6 +58,10 @@ export default class Dashboard extends Component {
         <h1>{this.state.user}</h1>
         <ul>{sheets}</ul>
         <Sheet sheet={this.state.currentSheet} />
+        <button onClick={() => this.setState({ create: !this.state.create })}>
+          Create a new Sheet
+        </button>
+        {this.state.create ? <Creator /> : ""}
       </div>
     );
   }

@@ -41,34 +41,34 @@ export default class Signup extends Component {
     }
     return (
       <div className="page">
-        <form onSubmit={this.formSubmit} className="signup">
+        <form onSubmit={this.formSubmit} className="form">
           <input
-            className="signup-field"
+            className="form-field"
             type="text"
             placeholder="Name"
             ref="name"
           />
           <input
-            className="signup-field"
+            className="form-field"
             type="text"
             placeholder="Username"
             ref="user"
           />
           <input
-            className="signup-field"
+            className="form-field"
             type="email"
             placeholder="Email"
             ref="email"
           />
           <input
-            className="signup-field"
+            className="form-field"
             type="password"
             placeholder="Password"
             ref="pass"
             onChange={(e) => this.setState({ password: e.target.value })}
           />
           <input
-            className="signup-field"
+            className="form-field"
             type="password"
             placeholder="Confirm Password"
             onChange={(e) => this.setState({ confirmPassword: e.target.value })}

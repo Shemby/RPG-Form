@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 // const User = require("./User");
 
 const sheetSchema = mongoose.Schema({
-  player: {
-    type: String,
-    required: true,
-  },
   name: {
     type: String,
     trim: true,
@@ -43,42 +39,33 @@ const sheetSchema = mongoose.Schema({
   },
   size: {
     type: String,
-    required: true,
   },
   race: {
     type: String,
-    required: true,
   },
   class: {
     type: String,
-    required: true,
   },
   level: {
     type: Number,
   },
   str: {
     type: Number,
-    required: true,
   },
   dex: {
     type: Number,
-    required: true,
   },
   con: {
     type: Number,
-    required: true,
   },
   int: {
     type: Number,
-    required: true,
   },
   wis: {
     type: Number,
-    required: true,
   },
   cha: {
     type: Number,
-    required: true,
   },
   hp: {
     type: Number,

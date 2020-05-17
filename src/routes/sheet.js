@@ -15,7 +15,6 @@ router.post("/user/sheets", auth, async (req, res) => {
       { new: true }
     );
     sheet.save();
-
     res.status(201).send(sheet);
   } catch (e) {
     res.status(400).send(e);
