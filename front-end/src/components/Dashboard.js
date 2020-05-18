@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import { Redirect } from "react-router-dom";
 
-import Creator from "./create";
-import Sheet from "./Sheet";
+import Sheet from "./sheet";
 
 export default class Dashboard extends Component {
   constructor() {
@@ -10,10 +10,9 @@ export default class Dashboard extends Component {
     this.state = {
       token: localStorage.getItem("token"),
       header: localStorage.getItem("Authorization"),
-      user: null,
+      user: "",
       sheets: [],
       currentSheet: {},
-      create: false,
     };
   }
   async componentDidMount() {
@@ -32,7 +31,7 @@ export default class Dashboard extends Component {
       },
     };
     Axios(userOptions).then((res) => {
-      this.setState({ user: res.data.username });
+      this.setState({ user: res.data });
     });
     Axios(sheetOptions).then((res) => {
       res.data.map((sheet) => {
@@ -44,6 +43,9 @@ export default class Dashboard extends Component {
   }
 
   render() {
+    if (this.props.isAuth === "false") {
+      return <Redirect to="/login" />;
+    }
     const sheets = this.state.sheets.map((sheet) => {
       return (
         <li key={sheet._id}>
@@ -55,13 +57,9 @@ export default class Dashboard extends Component {
     });
     return (
       <div>
-        <h1>{this.state.user}</h1>
+        <h1>{this.state.user.username}</h1>
         <ul>{sheets}</ul>
         <Sheet sheet={this.state.currentSheet} />
-        <button onClick={() => this.setState({ create: !this.state.create })}>
-          Create a new Sheet
-        </button>
-        {this.state.create ? <Creator /> : ""}
       </div>
     );
   }

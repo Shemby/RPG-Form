@@ -12,28 +12,29 @@ class Login extends Component {
     this.props.loginFunc(this.refs.email.value, this.refs.pass.value);
   }
   render() {
-    if (this.props.redirect === "/dashboard") {
-      return <Redirect to={this.props.redirect} />;
+    if (this.props.isAuth === "true") {
+      return <Redirect to="/dashboard" />;
+    } else {
+      return (
+        <form className="form" onSubmit={this.formSubmit}>
+          <input
+            className="form-field"
+            type="email"
+            placeholder="Email"
+            ref="email"
+          />
+          <input
+            className="form-field"
+            type="password"
+            placeholder="Password"
+            ref="pass"
+          />
+          <button className="btn-submit" type="submit">
+            Sign In
+          </button>
+        </form>
+      );
     }
-    return (
-      <form className="form" onSubmit={this.formSubmit}>
-        <input
-          className="form-field"
-          type="email"
-          placeholder="Email"
-          ref="email"
-        />
-        <input
-          className="form-field"
-          type="password"
-          placeholder="Password"
-          ref="pass"
-        />
-        <button className="btn-submit" type="submit">
-          Sign In
-        </button>
-      </form>
-    );
   }
 }
 

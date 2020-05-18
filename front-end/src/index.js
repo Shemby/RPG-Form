@@ -7,9 +7,8 @@ import "./styles/main.scss";
 import Nav from "./components/Nav";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-import Logout from "./components/Logout";
-import Singup from "./components/Signup";
 import Signup from "./components/Signup";
+import Creator from "./components/create";
 
 class App extends Component {
   constructor() {
@@ -19,8 +18,7 @@ class App extends Component {
     this.state = {
       token: localStorage.getItem("token"),
       header: localStorage.getItem("Authorization"),
-      isAuthenticated: false,
-      redirect: false,
+      isAuth: localStorage.getItem("isAuth"),
     };
   }
   async logout() {
@@ -32,13 +30,13 @@ class App extends Component {
       },
     };
     await Axios(options);
-    localStorage.clear();
+    await localStorage.clear();
+    await localStorage.setItem("isAuth", false);
     this.setState({
-      isAuthenticated: false,
-      redirect: "/login",
+      isAuth: localStorage.getItem("isAuth"),
     });
   }
-  login(email, pass) {
+  async login(email, pass) {
     const options = {
       method: "POST",
       url: "http://localhost:3000/user/login",
@@ -47,31 +45,27 @@ class App extends Component {
         password: pass,
       },
     };
-    Axios(options).then((res) => {
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("Authorization", `Bearer ${res.data.token}`);
-      this.setState({
-        isAuthenticated: true,
-        redirect: "/dashboard",
-      });
+    const res = await Axios(options);
+    await localStorage.setItem("token", res.data.token);
+    await localStorage.setItem("Authorization", `Bearer ${res.data.token}`);
+    await localStorage.setItem("isAuth", true);
+    this.setState({
+      token: localStorage.getItem("token"),
+      header: localStorage.getItem("Authorization"),
+      isAuth: localStorage.getItem("isAuth"),
     });
   }
 
   render() {
     return (
       <Router>
-        <Nav isAuth={this.state.isAuthenticated} />
+        <Nav isAuth={this.state.isAuth} logoutFunc={this.logout} />
         <Switch>
-          <Route exact path="/" component={Singup} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route exact path="/" component={Signup} />
           <Route
-            path="/logout"
+            path="/dashboard"
             render={(props) => (
-              <Logout
-                {...props}
-                logoutFunc={this.logout}
-                redirect={this.state.redirect}
-              />
+              <Dashboard {...props} isAuth={this.state.isAuth} />
             )}
           />
           <Route
@@ -79,12 +73,18 @@ class App extends Component {
             render={(props) => (
               <Login
                 {...props}
+                isAuth={this.state.isAuth}
                 loginFunc={this.login}
-                redirect={this.state.redirect}
               />
             )}
           />
           <Route path="/signup" component={Signup} />
+          <Route
+            path="/create"
+            render={(props) => (
+              <Creator {...props} isAuth={this.state.isAuth} />
+            )}
+          />
         </Switch>
       </Router>
     );

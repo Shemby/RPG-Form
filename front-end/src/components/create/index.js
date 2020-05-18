@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import Nav from "./Nav";
 import BasicInfo from "./BasicInfo";
@@ -67,26 +67,26 @@ export default class index extends Component {
 
   display() {
     const { step } = this.state;
-    if (step == 1) {
+    if (step === 1) {
       return (
         <BasicInfo handleChange={this.handleChange} character={this.state} />
       );
-    } else if (step == 2) {
+    } else if (step === 2) {
       return (
         <Abilities handleChange={this.handleChange} character={this.state} />
       );
-    } else if (step == 3) {
+    } else if (step === 3) {
       return (
         <Morality handleChange={this.handleChange} character={this.state} />
       );
-    } else if (step == 4) {
+    } else if (step === 4) {
       return <Depth handleChange={this.handleChange} character={this.state} />;
-    } else if (step == 5) {
+    } else if (step === 5) {
       return (
         <Equipment handleChange={this.handleChange} character={this.state} />
       );
-    } else if (step == 6) {
-      return <Review character={this.state} character={this.state} />;
+    } else if (step === 6) {
+      return <Review character={this.state} />;
     }
   }
 
@@ -100,6 +100,9 @@ export default class index extends Component {
   }
 
   render() {
+    if (this.props.isAuth === "false") {
+      return <Redirect to="/login" />;
+    }
     return (
       <div>
         <Nav navigate={this.navigate} />
