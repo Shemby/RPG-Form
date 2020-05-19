@@ -1,11 +1,8 @@
-const initialState = {
-  sheets: [],
-  user: "",
-  isAuth: false,
-  token: "",
-  header: "",
-};
+import { combineReducers } from "redux";
+import sheetReducer from "./sheetReducer";
+import userReducer from "./userReducer";
 
-const rootReducer = (state = initialState, action) => {
-  return state;
-};
+export const rootReducer = combineReducers({
+  sheetReducer,
+  userReducer,
+});

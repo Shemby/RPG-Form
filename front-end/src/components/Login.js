@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../actions/users";
 
 class Login extends Component {
   constructor() {
@@ -7,12 +9,13 @@ class Login extends Component {
     this.formSubmit = this.formSubmit.bind(this);
   }
 
-  formSubmit(e) {
+  formSubmit = (e) => {
+    console.log(e.target.value);
     e.preventDefault();
-    this.props.loginFunc(this.refs.email.value, this.refs.pass.value);
-  }
+    this.props.login(this.refs.email.value, this.refs.pass.value);
+  };
   render() {
-    if (this.props.isAuth === "true") {
+    if (this.props.isAuth === true) {
       return <Redirect to="/dashboard" />;
     } else {
       return (
@@ -22,12 +25,14 @@ class Login extends Component {
             type="email"
             placeholder="Email"
             ref="email"
+            value="hembysam4@gmail.com"
           />
           <input
             className="form-field"
             type="password"
             placeholder="Password"
             ref="pass"
+            value="Tarleton27"
           />
           <button className="btn-submit" type="submit">
             Sign In
@@ -38,4 +43,10 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.userReducer.isAuth,
+  };
+};
+
+export default connect(mapStateToProps, { login })(Login);

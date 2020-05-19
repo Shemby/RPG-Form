@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class Header extends Component {
+class Header extends Component {
   render() {
     const { sheet } = this.props;
     return (
@@ -22,3 +23,11 @@ export default class Header extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    sheet: state.sheetReducer.sheet,
+  };
+};
+
+export default connect(mapStateToProps, {})(Header);

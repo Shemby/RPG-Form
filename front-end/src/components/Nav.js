@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default class Nav extends Component {
+import { logout } from "../actions/users";
+
+class Nav extends Component {
   render() {
     let isLogged;
-    if (this.props.isAuth === "false") {
+    if (this.props.isAuth === false) {
       isLogged = (
         <div className="right">
           <NavLink className="nav-link " to="/login">
@@ -24,7 +27,7 @@ export default class Nav extends Component {
           <NavLink className="nav-link" to="/create">
             Create
           </NavLink>
-          <div className="nav-link right" onClick={this.props.logoutFunc}>
+          <div className="nav-link right" onClick={this.props.logout}>
             Logout
           </div>
         </>
@@ -40,3 +43,11 @@ export default class Nav extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.userReducer.isAuth,
+  };
+};
+
+export default connect(mapStateToProps, { logout })(Nav);

@@ -1,55 +1,34 @@
 import React, { Component } from "react";
-import Axios from "axios";
 import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
+import { getSheets, getSheet } from "../actions/sheets";
+import { getUser } from "../actions/users";
 import Sheet from "./sheet";
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor() {
     super();
-    this.state = {
-      token: localStorage.getItem("token"),
-      header: localStorage.getItem("Authorization"),
-      user: "",
-      sheets: [],
-      currentSheet: {},
-    };
+    this.handleClick = this.handleClick.bind(this);
   }
   async componentDidMount() {
-    const userOptions = {
-      method: "GET",
-      url: "http://localhost:3000/user/profile",
-      headers: {
-        Authorization: this.state.header,
-      },
-    };
-    const sheetOptions = {
-      method: "GET",
-      url: "http://localhost:3000/user/sheets",
-      headers: {
-        Authorization: this.state.header,
-      },
-    };
-    Axios(userOptions).then((res) => {
-      this.setState({ user: res.data });
-    });
-    Axios(sheetOptions).then((res) => {
-      res.data.map((sheet) => {
-        return this.setState({
-          sheets: [...this.state.sheets, sheet],
-        });
-      });
-    });
+    if (this.props.user === "no user") {
+      this.props.getUser();
+    }
+    this.props.getSheets();
   }
+  handleClick = (e) => {
+    this.props.getSheet(e.target.value);
+  };
 
   render() {
-    if (this.props.isAuth === "false") {
+    if (this.props.isAuth === false) {
       return <Redirect to="/login" />;
     }
-    const sheets = this.state.sheets.map((sheet) => {
+    const sheets = this.props.sheets.map((sheet) => {
       return (
         <li key={sheet._id}>
-          <button onClick={() => this.setState({ currentSheet: sheet })}>
+          <button value={sheet._id} onClick={this.handleClick}>
             {sheet.name}
           </button>
         </li>
@@ -57,10 +36,25 @@ export default class Dashboard extends Component {
     });
     return (
       <div>
-        <h1>{this.state.user.username}</h1>
+        <h1>{this.props.user.username}</h1>
         <ul>{sheets}</ul>
-        <Sheet sheet={this.state.currentSheet} />
+        {this.props.sheet.name !== undefined ? <Sheet /> : ""}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.userReducer.isAuth,
+    user: state.userReducer.user,
+    sheets: state.sheetReducer.sheets,
+    sheet: state.sheetReducer.sheet,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getSheets,
+  getSheet,
+  getUser,
+})(Dashboard);
