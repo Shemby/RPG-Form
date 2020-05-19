@@ -1,4 +1,11 @@
 import React, { Component } from "react";
+import Header from "./Header";
+import Abilities from "./Abilities";
+import Initiative from "./Initiative";
+import SavingThrows from "./SavingThrows";
+import Skills from "./Skills";
+import Proficiencies from "./Proficiencies";
+import Info from "./Info";
 
 export default class Sheet extends Component {
   constructor(props) {
@@ -13,21 +20,13 @@ export default class Sheet extends Component {
     const { sheet } = this.props;
     return (
       <div>
-        <div className="heading">
-          <div className="basic">
-            <h1>{sheet.name}</h1>
-            <div>
-              <span>{sheet.gender}</span>
-              <span>{sheet.race}</span>
-              <span>{`${sheet.class} ${sheet.level}`}</span>
-            </div>
-          </div>
-          <div className="heading-tools">
-            <button className="btn-share"></button>
-            <button className="btn-rest"></button>
-            <button className="btn-edit"></button>
-          </div>
-        </div>
+        <Header sheet={sheet} />
+        <Abilities sheet={sheet} />
+        <Initiative sheet={sheet} />
+        <SavingThrows sheet={sheet} />
+        <Skills sheet={sheet} />
+        <Proficiencies sheet={sheet} />
+        <Info sheet={sheet} />
       </div>
     );
   }
