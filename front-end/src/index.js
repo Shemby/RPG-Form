@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Axios from "axios";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 
 import "./styles/main.scss";
 import Nav from "./components/Nav";
@@ -9,6 +11,7 @@ import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import Signup from "./components/Signup";
 import Creator from "./components/create";
+import rootReducer from "./reducers";
 
 class App extends Component {
   constructor() {
@@ -91,4 +94,11 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const store = createStore(rootReducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
