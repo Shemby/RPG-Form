@@ -1,0 +1,32 @@
+.abilities-init {
+  &-container {
+    background-color: black;
+    height: 100px;
+    width: 80px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  &-background {
+    margin: 0;
+    padding: 0;
+    height: 95%;
+    width: 95%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+  &-name {
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: 35%;
+  }
+  &-main {
+    font-size: 30px;
+  }
+}

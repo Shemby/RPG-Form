@@ -3,3 +3,23 @@
   right: 5%;
   width: 120px;
 }
+.sheet {
+  width: 1200px;
+  margin: auto;
+}
+.abilities {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &-scores,
+  &-ac,
+  &-hp {
+    display: flex;
+    height: 100px;
+    &-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

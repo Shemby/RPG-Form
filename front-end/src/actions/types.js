@@ -14,3 +14,6 @@ export const SHEET_DELETED = "SHEET_DELETED";
 export const SHEET_ASSIGNED = "SHEET_ASSIGNED";
 export const SHEET_CLOSED = "SHEET_CLOSED";
 export const MODS_ASSIGNED = "MODS_ASSIGNED";
+export const HEALED = "HEALED";
+export const DAMAGED = "DAMAGED";
+export const RESET = "RESET";

@@ -16,7 +16,6 @@ class Header extends Component {
         </div>
         <div className="heading-tools">
           <button className="btn-share">{`Share: ${sheet.name}`}</button>
-          <button className="btn-rest">Rest</button>
           <button className="btn-edit">{`Edit: ${sheet.name}`}</button>
         </div>
       </div>

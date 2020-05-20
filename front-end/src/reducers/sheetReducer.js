@@ -3,6 +3,9 @@ import {
   MODS_ASSIGNED,
   SHEET_ASSIGNED,
   SHEET_CLOSED,
+  HEALED,
+  DAMAGED,
+  RESET,
 } from "../actions/types";
 
 const initialState = {
@@ -17,6 +20,7 @@ const initialState = {
     wis: 0,
     cha: 0,
   },
+  currentHp: 0,
 };
 
 const sheetReducer = (state = initialState, action) => {
@@ -42,11 +46,28 @@ const sheetReducer = (state = initialState, action) => {
           wis: Math.floor((state.sheet.wis - 10) / 2),
           cha: Math.floor((state.sheet.cha - 10) / 2),
         },
+        currentHp: state.sheet.hp,
       };
     case SHEET_CLOSED:
       return {
         ...state,
         sheet: {},
+      };
+    case HEALED:
+      console.log(typeof state.currentHp);
+      return {
+        ...state,
+        currentHp: state.currentHp + Number(action.payload),
+      };
+    case DAMAGED:
+      return {
+        ...state,
+        currentHp: state.currentHp - Number(action.payload),
+      };
+    case RESET:
+      return {
+        ...state,
+        currentHp: state.sheet.hp,
       };
     default:
       return state;

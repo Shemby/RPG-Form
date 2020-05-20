@@ -1,0 +1,62 @@
+.abilities-ac {
+  &-container {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    height: 100px;
+    width: 80px;
+    clip-path: polygon(0 0, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+    align-items: center;
+    justify-content: center;
+  }
+  &-background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    height: 95%;
+    width: 95%;
+    clip-path: polygon(0 0, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+    padding-top: 10px;
+  }
+  &-name {
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  &-main {
+    font-size: 30px;
+    padding-right: 5%;
+  }
+  &-secondary {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 4px;
+    &-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 80px;
+    }
+    &-name {
+      background-color: black;
+      color: white;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      width: 43px;
+      text-align: center;
+    }
+    &-main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid black;
+      height: 30px;
+      width: 30px;
+    }
+  }
+}

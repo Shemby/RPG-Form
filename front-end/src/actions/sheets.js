@@ -3,6 +3,9 @@ import {
   SHEET_ASSIGNED,
   SHEET_CLOSED,
   MODS_ASSIGNED,
+  HEALED,
+  DAMAGED,
+  RESET,
 } from "./types";
 import Axios from "axios";
 
@@ -38,5 +41,25 @@ export const getSheet = (id) => {
 export const closeSheet = () => {
   return {
     type: SHEET_CLOSED,
+  };
+};
+
+export const heal = (hp) => {
+  return {
+    type: HEALED,
+    payload: hp,
+  };
+};
+
+export const damage = (hp) => {
+  return {
+    type: DAMAGED,
+    payload: hp,
+  };
+};
+
+export const reset = () => {
+  return {
+    type: RESET,
   };
 };

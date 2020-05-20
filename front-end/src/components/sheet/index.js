@@ -20,17 +20,17 @@ class Sheet extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="sheet">
         <button className="btn-close" onClick={this.closeSheet}>
           close
         </button>
         <Header />
         <Abilities />
-        {/* <Initiative />
+        <Initiative />
         <SavingThrows />
         <Skills />
         <Proficiencies />
-        <Info /> */}
+        <Info />
       </div>
     );
   }
