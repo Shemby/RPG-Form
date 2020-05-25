@@ -54,7 +54,6 @@ const sheetReducer = (state = initialState, action) => {
         sheet: {},
       };
     case HEALED:
-      console.log(typeof state.currentHp);
       return {
         ...state,
         currentHp: state.currentHp + Number(action.payload),

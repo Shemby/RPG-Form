@@ -1,34 +1,23 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class Equipment extends Component {
+class Equipment extends Component {
+  constructor() {
+    super();
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+  handleSelect() {}
   render() {
-    const { handleChange, character } = this.props;
-    return (
-      <div className="form">
-        <form className="form">
-          <input
-            className="form-field"
-            type="text"
-            placeholder="armor"
-            value={character.armor}
-            onChange={handleChange("armor")}
-          />
-          <input
-            className="form-field"
-            type="text"
-            value={character.shield}
-            onChange={handleChange("shield")}
-          />
-          <input
-            className="form-field"
-            type="text"
-            value={character.weapon}
-            onChange={handleChange("weapon")}
-          />
-        </form>
-        <button className="btn-submit">previous</button>
-        <button className="btn-submit">next</button>
-      </div>
-    );
+    return <div className="form"></div>;
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    armor: state.creatorReducer.armor,
+    shield: state.creatorReducer.shield,
+    weapons: state.creatorReducer.weapons,
+  };
+};
+
+export default connect(mapStateToProps, {})(Equipment);

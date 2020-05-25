@@ -10,7 +10,7 @@ const sheetSchema = mongoose.Schema({
     type: Number,
   },
   height: {
-    type: Number,
+    type: String,
   },
   weight: {
     type: Number,
@@ -37,14 +37,11 @@ const sheetSchema = mongoose.Schema({
     type: String,
     trim: true,
   },
-  size: {
-    type: String,
-  },
   race: {
-    type: String,
+    type: {},
   },
   class: {
-    type: String,
+    type: {},
   },
   level: {
     type: Number,
@@ -70,14 +67,8 @@ const sheetSchema = mongoose.Schema({
   hp: {
     type: Number,
   },
-  armor: {
-    type: String,
-  },
-  shield: {
-    type: String,
-  },
-  weapon: {
-    type: String,
+  equipment: {
+    type: [],
   },
   nat: {
     type: Number,

@@ -1,0 +1,41 @@
+.saves-st {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  border: 2px solid black;
+  height: 150px;
+  align-items: center;
+  font-size: 16px;
+  justify-content: space-between;
+  padding: 5px;
+  &-container {
+    margin-top: 7px;
+  }
+  &-box {
+    width: 120px;
+    background-color: black;
+    color: white;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3px;
+    border-radius: 5px;
+  }
+  &-name {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-left: 10px;
+  }
+  &-value {
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    background-color: white;
+    color: black;
+  }
+}

@@ -79,29 +79,15 @@ class Abilities extends Component {
             </div>
           </div>
         </div>
-        <div className="abilities-ac">
-          <div className="abilities-ac-container">
-            <div className="abilities-ac-background">
-              <div className="abilities-ac-name">Armor</div>
-              <div className="abilities-ac-main">
-                {10 + Number(sheet.armor) + mods.dex}
-              </div>
-              <div className="abilities-ac-name">Class</div>
-            </div>
-          </div>
-          <div className="abilities-ac-secondary">
-            <div className="abilities-ac-secondary-container">
-              <div className="abilities-ac-secondary-name">Touch</div>
-              <div className="abilities-ac-secondary-main">{10 + mods.dex}</div>
-            </div>
-            <div className="abilities-ac-secondary-container">
-              <div className="abilities-ac-secondary-name">Flat Footed</div>
-              <div className="abilities-ac-secondary-main">
-                {Number(sheet.armor) + 10}
-              </div>
+        <div className="abilities-speed">
+          <div className="abilities-speed-container">
+            <div className="abilities-speed-background">
+              <div className="abilities-speed-name">Speed</div>
+              <div className="abilities-speed-main">30ft.</div>
             </div>
           </div>
         </div>
+
         <div className="abilities-hp">
           <div className="abilities-hp-container">
             <div className="abilities-hp-manager">

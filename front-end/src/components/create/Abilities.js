@@ -1,53 +1,72 @@
 import React, { Component } from "react";
+import { changeAbilities } from "../../actions/creator";
+import { connect } from "react-redux";
 
-export default class Abilities extends Component {
+class Abilities extends Component {
+  constructor() {
+    super();
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange = (name) => (e) => {
+    this.props.changeAbilities(name, e.target.value);
+  };
+
   render() {
-    const { handleChange, character } = this.props;
+    const { str, con, dex, cha, wis, int } = this.props.abilities;
     return (
-      <form className="form" onSubmit={this.formSubmit}>
+      <form className="form">
         <input
           className="form-field"
-          type="text"
+          type="number"
           placeholder="strength"
-          value={character.str}
-          onChange={handleChange("str")}
+          value={str}
+          onChange={this.handleChange("str")}
         />
         <input
           className="form-field"
-          type="text"
+          type="number"
           placeholder="dexterity"
-          value={character.dex}
-          onChange={handleChange("dex")}
+          value={dex}
+          onChange={this.handleChange("dex")}
         />
         <input
           className="form-field"
-          type="text"
+          type="number"
           placeholder="constitution"
-          value={character.con}
-          onChange={handleChange("con")}
+          value={con}
+          onChange={this.handleChange("con")}
         />
         <input
           className="form-field"
-          type="text"
+          type="number"
           placeholder="intelligence"
-          value={character.int}
-          onChange={handleChange("int")}
+          value={int}
+          onChange={this.handleChange("int")}
         />
         <input
           className="form-field"
-          type="text"
+          type="number"
           placeholder="wisdom"
-          value={character.wis}
-          onChange={handleChange("wis")}
+          value={wis}
+          onChange={this.handleChange("wis")}
         />
         <input
           className="form-field"
-          type="text"
+          type="number"
           placeholder="charisma"
-          value={character.cha}
-          onChange={handleChange("cha")}
+          value={cha}
+          onChange={this.handleChange("cha")}
         />
       </form>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    abilities: state.creatorReducer.abilities,
+  };
+};
+
+export default connect(mapStateToProps, { changeAbilities })(Abilities);

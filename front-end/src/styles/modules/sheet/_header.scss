@@ -1,0 +1,19 @@
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: gray;
+  padding: 10px;
+  &-basic {
+    display: flex;
+    flex-direction: column;
+    &-primary {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &-tools {
+    align-self: flex-end;
+  }
+}
