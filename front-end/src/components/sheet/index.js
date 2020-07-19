@@ -8,7 +8,7 @@ import SavingThrows from "./SavingThrows";
 import Skills from "./Skills";
 import Proficiencies from "./Proficiencies";
 import Info from "./Info";
-import { getSheet, closeSheet } from "../../actions/sheets";
+import { getSheet, closeSheet, getSkills } from "../../actions/sheets";
 
 class Sheet extends Component {
   constructor() {
@@ -42,4 +42,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getSheet, closeSheet })(Sheet);
+export default connect(mapStateToProps, { getSheet, closeSheet, getSkills })(
+  Sheet
+);

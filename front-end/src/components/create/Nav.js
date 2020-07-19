@@ -7,39 +7,39 @@ class Nav extends Component {
   render() {
     return (
       <nav className="nav">
-        <button className="nav-link" onClick={() => this.props.changeStep(1)}>
+        <button className="btn-link" onClick={() => this.props.changeStep(1)}>
           Basic
         </button>
         <button
-          className="nav-link"
+          className="btn-link"
           value={2}
           onClick={() => this.props.changeStep(2)}
         >
           Abilities
         </button>
         <button
-          className="nav-link"
+          className="btn-link"
           value={3}
           onClick={() => this.props.changeStep(3)}
         >
           Morality
         </button>
         <button
-          className="nav-link"
+          className="btn-link"
           value={4}
           onClick={() => this.props.changeStep(4)}
         >
           Depth
         </button>
         <button
-          className="nav-link"
+          className="btn-link"
           value={5}
           onClick={() => this.props.changeStep(5)}
         >
           Equipment
         </button>
         <button
-          className="nav-link"
+          className="btn-link"
           value={6}
           onClick={() => this.props.changeStep(6)}
         >

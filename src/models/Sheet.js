@@ -43,40 +43,31 @@ const sheetSchema = mongoose.Schema({
   class: {
     type: {},
   },
-  level: {
-    type: Number,
+  abilities: {
+    type: {},
   },
-  str: {
-    type: Number,
+  equipment: {
+    type: {},
   },
-  dex: {
-    type: Number,
+  domains: {
+    type: [],
   },
-  con: {
-    type: Number,
+  feats: {
+    type: {},
   },
-  int: {
-    type: Number,
-  },
-  wis: {
-    type: Number,
-  },
-  cha: {
-    type: Number,
+  skills: {
+    type: {},
   },
   hp: {
     type: Number,
   },
-  equipment: {
-    type: [],
-  },
-  nat: {
+  sr: {
     type: Number,
   },
-  def: {
+  level: {
     type: Number,
   },
-  dr: {
+  xp: {
     type: Number,
   },
 });

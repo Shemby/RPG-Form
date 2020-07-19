@@ -8,6 +8,7 @@ const router = express.Router();
 //create sheet
 router.post("/user/sheets", auth, async (req, res) => {
   const sheet = new Sheet(req.body);
+  console.log(req.user);
   try {
     await User.updateOne(
       { _id: req.user._id },

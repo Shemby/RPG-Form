@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { changeAbilities } from "../../actions/creator";
 import { connect } from "react-redux";
+
+import { changeAbilities, changeHp } from "../../actions/creator";
 
 class Abilities extends Component {
   constructor() {
@@ -12,51 +13,69 @@ class Abilities extends Component {
     this.props.changeAbilities(name, e.target.value);
   };
 
+  handleHp = (e) => {
+    this.props.changeHp(e.target.value);
+  };
+
   render() {
     const { str, con, dex, cha, wis, int } = this.props.abilities;
     return (
       <form className="form">
+        <label htmlFor="strength">Strength</label>
         <input
           className="form-field"
           type="number"
-          placeholder="strength"
+          name="strength"
           value={str}
           onChange={this.handleChange("str")}
         />
+        <label htmlFor="dexterity">Dexterity</label>
         <input
           className="form-field"
           type="number"
-          placeholder="dexterity"
+          name="dexterity"
           value={dex}
           onChange={this.handleChange("dex")}
         />
+        <label htmlFor="constitution">Constitution</label>
         <input
           className="form-field"
           type="number"
-          placeholder="constitution"
+          name="constitution"
           value={con}
           onChange={this.handleChange("con")}
         />
+        <label htmlFor="intelligence">Intelligence</label>
         <input
           className="form-field"
           type="number"
-          placeholder="intelligence"
+          name="intelligence"
           value={int}
           onChange={this.handleChange("int")}
         />
+        <label htmlFor="wisdom">Wisdom</label>
         <input
           className="form-field"
           type="number"
-          placeholder="wisdom"
+          name="wisdom"
           value={wis}
           onChange={this.handleChange("wis")}
         />
+        <label htmlFor="charisma">Charisma</label>
         <input
           className="form-field"
           type="number"
-          placeholder="charisma"
+          name="charisma"
           value={cha}
           onChange={this.handleChange("cha")}
+        />
+        <label htmlFor="hp">Hit Points</label>
+        <input
+          className="form-field"
+          type="number"
+          name="hp"
+          value={this.props.hp}
+          onChange={this.handleHp}
         />
       </form>
     );
@@ -65,8 +84,11 @@ class Abilities extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    abilities: state.creatorReducer.abilities,
+    abilities: state.creatorReducer.character.abilities,
+    hp: state.creatorReducer.character.hp,
   };
 };
 
-export default connect(mapStateToProps, { changeAbilities })(Abilities);
+export default connect(mapStateToProps, { changeAbilities, changeHp })(
+  Abilities
+);

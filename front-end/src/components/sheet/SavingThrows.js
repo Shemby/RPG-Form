@@ -1,9 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { sr } from "../../actions/sheets";
+
 class SavingThrows extends Component {
+  constructor() {
+    super();
+    this.handleSr = this.handleSr.bind(this);
+  }
+  handleSr = (e) => {
+    this.props.sr(e.target.value);
+  };
+
   render() {
     const { sheet, mods } = this.props;
+    let armorBonus = 0;
+    if (sheet.equipment.armor) {
+      const armors = sheet.equipment.armor.map((armor) => {
+        return armor.bonus;
+      });
+      armors.forEach((bonus) => {
+        armorBonus += bonus;
+      });
+    }
     return (
       <div className="saves">
         <div className="saves-st">
@@ -36,7 +55,7 @@ class SavingThrows extends Component {
               <div className="saves-ac-background">
                 <div className="saves-ac-name">Armor</div>
                 <div className="saves-ac-main">
-                  {10 + Number(sheet.armor) + mods.dex}
+                  {10 + mods.dex + armorBonus}
                 </div>
                 <div className="saves-ac-name">Class</div>
               </div>
@@ -48,9 +67,7 @@ class SavingThrows extends Component {
               </div>
               <div className="saves-ac-secondary-container">
                 <div className="saves-ac-secondary-name">FF</div>
-                <div className="saves-ac-secondary-main">
-                  {Number(sheet.armor) + 10}
-                </div>
+                <div className="saves-ac-secondary-main">{armorBonus + 10}</div>
               </div>
             </div>
           </div>
@@ -59,7 +76,13 @@ class SavingThrows extends Component {
           <div className="saves-sr-container">
             <div className="saves-sr-background">
               <div className="saves-sr-name">Spell Resist</div>
-              <div className="saves-sr-main">4</div>
+              <div className="saves-sr-main">
+                <input
+                  type="number"
+                  className="saves-sr-inp"
+                  onChange={this.handleSr}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -75,4 +98,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(SavingThrows);
+export default connect(mapStateToProps, { sr })(SavingThrows);

@@ -6,6 +6,10 @@ import {
   HEALED,
   DAMAGED,
   RESET,
+  SR_SET,
+  SKILLS_RECIEVED,
+  RANK_CHANGED,
+  MISC_CHANGED,
 } from "../actions/types";
 
 const initialState = {
@@ -21,6 +25,7 @@ const initialState = {
     cha: 0,
   },
   currentHp: 0,
+  skills: [],
 };
 
 const sheetReducer = (state = initialState, action) => {
@@ -39,12 +44,12 @@ const sheetReducer = (state = initialState, action) => {
       return {
         ...state,
         mods: {
-          str: Math.floor((state.sheet.str - 10) / 2),
-          dex: Math.floor((state.sheet.dex - 10) / 2),
-          con: Math.floor((state.sheet.con - 10) / 2),
-          int: Math.floor((state.sheet.int - 10) / 2),
-          wis: Math.floor((state.sheet.wis - 10) / 2),
-          cha: Math.floor((state.sheet.cha - 10) / 2),
+          str: Math.floor((state.sheet.abilities.str - 10) / 2),
+          dex: Math.floor((state.sheet.abilities.dex - 10) / 2),
+          con: Math.floor((state.sheet.abilities.con - 10) / 2),
+          int: Math.floor((state.sheet.abilities.int - 10) / 2),
+          wis: Math.floor((state.sheet.abilities.wis - 10) / 2),
+          cha: Math.floor((state.sheet.abilities.cha - 10) / 2),
         },
         currentHp: state.sheet.hp,
       };
@@ -67,6 +72,34 @@ const sheetReducer = (state = initialState, action) => {
       return {
         ...state,
         currentHp: state.sheet.hp,
+      };
+    case SR_SET:
+      return {
+        ...state,
+        sheet: {
+          ...state.sheet,
+          sr: action.payload,
+        },
+      };
+    case SKILLS_RECIEVED:
+      return {
+        ...state,
+        skills: action.payload,
+      };
+    case RANK_CHANGED:
+      const skillIndex = state.skills
+        .map((skill) => {
+          return skill.name;
+        })
+        .indexOf(action.payload.key);
+      console.log(skillIndex);
+      return {
+        ...state,
+        skills: [...state.skills],
+      };
+    case MISC_CHANGED:
+      return {
+        ...state,
       };
     default:
       return state;

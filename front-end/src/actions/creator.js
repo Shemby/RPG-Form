@@ -16,9 +16,33 @@ import {
   SKIN_ADDED,
   WEAPON_ADDED,
   ARMOR_ADDED,
+  ARMOR_REMOVED,
+  WEAPON_REMOVED,
+  RACE_REMOVED,
+  CLASS_REMOVED,
+  ALIGNMENT_ADDED,
+  ALIGNMENT_REMOVED,
+  SHEET_CREATED,
+  HP_CHANGED,
 } from "./types";
 import Axios from "axios";
 
+export const createSheet = () => {
+  return async function (dispatch, getState) {
+    const state = getState();
+    const options = {
+      method: "POST",
+      url: `http://localhost:3000/user/sheets`,
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+      data: state.creatorReducer.character,
+    };
+    console.log(state.creatorReducer.character);
+    await Axios(options);
+    dispatch({ type: SHEET_CREATED });
+  };
+};
 export const changeStep = (step) => {
   return {
     type: STEP_CHANGED,
@@ -33,17 +57,57 @@ export const changeAbilities = (name, value) => {
   };
 };
 
-export const changeClass = (type) => {
+export const changeHp = (value) => {
   return {
-    type: CLASS_CHANGED,
-    payload: type,
+    type: HP_CHANGED,
+    payload: value,
   };
 };
 
-export const changeRace = (race) => {
+export const addClass = (type) => {
+  const options = {
+    method: "GET",
+    url: `http://localhost:2000/type/${type}`,
+  };
+  return async function (dispatch) {
+    const res = await Axios(options);
+    dispatch({ type: CLASS_CHANGED, payload: res.data });
+  };
+};
+
+export const addRace = (race) => {
+  const options = {
+    method: "GET",
+    url: `http://localhost:2000/race/${race}`,
+  };
+  return async function (dispatch) {
+    const res = await Axios(options);
+    dispatch({ type: RACE_CHANGED, payload: res.data });
+  };
+};
+
+export const removeRace = () => {
   return {
-    type: RACE_CHANGED,
-    payload: race,
+    type: RACE_REMOVED,
+  };
+};
+
+export const removeClass = () => {
+  return {
+    type: CLASS_REMOVED,
+  };
+};
+
+export const addAlignment = (alignment) => {
+  return {
+    type: ALIGNMENT_ADDED,
+    payload: alignment,
+  };
+};
+
+export const removeAlignment = () => {
+  return {
+    type: ALIGNMENT_REMOVED,
   };
 };
 
@@ -79,11 +143,25 @@ export const addWeapon = (weapon) => {
 export const addArmor = (armor) => {
   const options = {
     method: "GET",
-    url: `http://localhost:2000/weapon/${armor}`,
+    url: `http://localhost:2000/armor/${armor}`,
   };
   return async function (dispatch) {
     const res = await Axios(options);
     dispatch({ type: ARMOR_ADDED, payload: res.data });
+  };
+};
+
+export const removeArmor = (armor) => {
+  return {
+    type: ARMOR_REMOVED,
+    payload: armor,
+  };
+};
+
+export const removeWeapon = (weapon) => {
+  return {
+    type: WEAPON_REMOVED,
+    payload: weapon,
   };
 };
 

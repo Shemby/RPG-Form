@@ -13,8 +13,8 @@ class Header extends Component {
           </div>
           <div className="heading-basic-secondary">
             <span>{`${sheet.gender} `}</span>
-            <span>{`${sheet.race} `}</span>
-            <span>{`${sheet.class} `}</span>
+            <span>{`${sheet.race.name} `}</span>
+            <span>{`${sheet.class.name} `}</span>
             <span>{`${sheet.level}`}</span>
             <div className="heading-basic-exp">{`XP: ${sheet.xp}`}</div>
           </div>

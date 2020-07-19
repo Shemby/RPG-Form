@@ -10,66 +10,74 @@ class Depth extends Component {
   }
 
   handleInput = (e) => {
-    const type = e.target.placeholder;
+    const type = e.target.name;
     const value = e.target.value;
     this.props.addDepth(type, value);
   };
   render() {
     return (
       <form className="form" onSubmit={this.formSubmit}>
+        <label htmlFor="name">Name</label>
         <input
           className="form-field"
           type="text"
-          placeholder="name"
+          name="name"
           value={this.props.name}
           onChange={this.handleInput}
         />
-        <input
-          className="form-field"
-          type="text"
-          placeholder="age"
-          value={this.props.age}
-          onChange={this.handleInput}
-        />
-        <input
-          className="form-field"
-          type="text"
-          placeholder="gender"
-          value={this.props.gender}
-          onChange={this.handleInput}
-        />
-        <input
-          className="form-field"
-          type="text"
-          placeholder="height"
-          value={this.props.height}
-          onChange={this.handleInput}
-        />
+        <label htmlFor="age">Age</label>
         <input
           className="form-field"
           type="number"
-          placeholder="weight"
+          name="age"
+          value={this.props.age}
+          onChange={this.handleInput}
+        />
+        <label htmlFor="gender">Gender</label>
+        <input
+          className="form-field"
+          type="text"
+          name="gender"
+          value={this.props.gender}
+          onChange={this.handleInput}
+        />
+        <label htmlFor="height">Height</label>
+        <input
+          className="form-field"
+          type="text"
+          name="height"
+          value={this.props.height}
+          onChange={this.handleInput}
+        />
+        <label htmlFor="weight">Weight</label>
+        <input
+          className="form-field"
+          type="number"
+          name="weight"
           value={this.props.weight}
           onChange={this.handleInput}
         />
+        <label htmlFor="eyes">Eyes</label>
         <input
           className="form-field"
           type="text"
-          placeholder="eyes"
+          name="eyes"
           value={this.props.eyes}
           onChange={this.handleInput}
         />
+        <label htmlFor="hair">Hair</label>
         <input
           className="form-field"
           type="text"
-          placeholder="hair"
+          name="hair"
           value={this.props.hair}
           onChange={this.handleInput}
         />
+        <label htmlFor="skin">Skin</label>
         <input
           className="form-field"
           type="text"
-          placeholder="skin"
+          name="skin"
           value={this.props.skin}
           onChange={this.handleInput}
         />
@@ -80,14 +88,14 @@ class Depth extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    name: state.creatorReducer.name,
-    age: state.creatorReducer.age,
-    gender: state.creatorReducer.gender,
-    height: state.creatorReducer.height,
-    weight: state.creatorReducer.weight,
-    eyes: state.creatorReducer.eyes,
-    hair: state.creatorReducer.hair,
-    skin: state.creatorReducer.skin,
+    name: state.creatorReducer.character.name,
+    age: state.creatorReducer.character.age,
+    gender: state.creatorReducer.character.gender,
+    height: state.creatorReducer.character.height,
+    weight: state.creatorReducer.character.weight,
+    eyes: state.creatorReducer.character.eyes,
+    hair: state.creatorReducer.character.hair,
+    skin: state.creatorReducer.character.skin,
   };
 };
 

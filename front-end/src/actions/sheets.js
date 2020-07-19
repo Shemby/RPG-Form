@@ -6,6 +6,10 @@ import {
   HEALED,
   DAMAGED,
   RESET,
+  SR_SET,
+  SKILLS_RECIEVED,
+  RANK_CHANGED,
+  MISC_CHANGED,
 } from "./types";
 import Axios from "axios";
 
@@ -61,5 +65,43 @@ export const damage = (hp) => {
 export const reset = () => {
   return {
     type: RESET,
+  };
+};
+
+export const sr = (sr) => {
+  return {
+    type: SR_SET,
+    payload: Number(sr),
+  };
+};
+
+export const getSkills = () => {
+  const options = {
+    method: "GET",
+    url: "http://localhost:2000/skills",
+  };
+  return async function (dispatch) {
+    const res = await Axios(options);
+    dispatch({ type: SKILLS_RECIEVED, payload: res.data });
+  };
+};
+
+export const changeRank = (key, value) => {
+  return {
+    type: RANK_CHANGED,
+    payload: {
+      key,
+      value,
+    },
+  };
+};
+
+export const changeMisc = (key, value) => {
+  return {
+    type: MISC_CHANGED,
+    payload: {
+      key,
+      value,
+    },
   };
 };

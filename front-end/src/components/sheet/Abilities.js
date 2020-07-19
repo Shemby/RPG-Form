@@ -31,42 +31,42 @@ class Abilities extends Component {
             <div className="abilities-scores-main">
               {mods.str >= 0 ? `+${mods.str}` : mods.str}
             </div>
-            <div className="abilities-scores-sub">{sheet.str}</div>
+            <div className="abilities-scores-sub">{sheet.abilities.str}</div>
           </div>
           <div className="abilities-scores-container">
             <div className="abilities-scores-name">Dexterity</div>
             <div className="abilities-scores-main">
               {mods.dex >= 0 ? `+${mods.dex}` : mods.dex}
             </div>
-            <div className="abilities-scores-sub">{sheet.dex}</div>
+            <div className="abilities-scores-sub">{sheet.abilities.dex}</div>
           </div>
           <div className="abilities-scores-container">
             <div className="abilities-scores-name">Constitution</div>
             <div className="abilities-scores-main">
               {mods.con >= 0 ? `+${mods.con}` : mods.con}
             </div>
-            <div className="abilities-scores-sub">{sheet.con}</div>
+            <div className="abilities-scores-sub">{sheet.abilities.con}</div>
           </div>
           <div className="abilities-scores-container">
             <div className="abilities-scores-name">Intelligence</div>
             <div className="abilities-scores-main">
               {mods.int >= 0 ? `+${mods.int}` : mods.int}
             </div>
-            <div className="abilities-scores-sub">{sheet.int}</div>
+            <div className="abilities-scores-sub">{sheet.abilities.int}</div>
           </div>
           <div className="abilities-scores-container">
             <div className="abilities-scores-name">Wisdom</div>
             <div className="abilities-scores-main">
               {mods.wis >= 0 ? `+${mods.wis}` : mods.wis}
             </div>
-            <div className="abilities-scores-sub">{sheet.wis}</div>
+            <div className="abilities-scores-sub">{sheet.abilities.wis}</div>
           </div>
           <div className="abilities-scores-container">
             <div className="abilities-scores-name">Charisma</div>
             <div className="abilities-scores-main">
               {mods.cha >= 0 ? `+${mods.cha}` : mods.cha}
             </div>
-            <div className="abilities-scores-sub">{sheet.cha}</div>
+            <div className="abilities-scores-sub">{sheet.abilities.cha}</div>
           </div>
         </div>
         <div className="abilities-init">

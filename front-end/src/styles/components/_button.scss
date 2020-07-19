@@ -39,3 +39,13 @@
   border-radius: 5px;
   width: 100px;
 }
+.btn-link {
+  background-color: transparent;
+  cursor: pointer;
+  color: white;
+  border: none;
+  margin-right: 30px;
+  &:hover {
+    color: red;
+  }
+}
