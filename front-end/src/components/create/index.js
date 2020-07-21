@@ -11,6 +11,7 @@ import Morality from "./Morality";
 import Depth from "./Depth";
 import Equipment from "./Equipment";
 import Review from "./Review";
+import Skills from "./Skills";
 
 class Creator extends Component {
   constructor() {
@@ -41,6 +42,8 @@ class Creator extends Component {
     } else if (step === 5) {
       return <Equipment />;
     } else if (step === 6) {
+      return <Skills />;
+    } else if (step === 7) {
       return <Review />;
     }
   }

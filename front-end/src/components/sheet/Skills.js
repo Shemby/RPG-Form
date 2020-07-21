@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getSkills, changeRank, changeMisc } from "../../actions/sheets";
+import { changeRank, changeMisc } from "../../actions/sheets";
+import { getSkills } from "../../actions/creator";
 
 class Skills extends Component {
   constructor() {
@@ -74,7 +75,7 @@ class Skills extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    skills: state.sheetReducer.skills,
+    skills: state.creatorReducer.skills,
     type: state.sheetReducer.sheet.class,
     mods: state.sheetReducer.mods,
     level: state.sheetReducer.sheet.level,

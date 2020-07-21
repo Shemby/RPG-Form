@@ -24,6 +24,7 @@ import {
   ALIGNMENT_REMOVED,
   SHEET_CREATED,
   HP_CHANGED,
+  SKILLS_RECIEVED,
 } from "./types";
 import Axios from "axios";
 
@@ -169,6 +170,18 @@ export const addDeity = (deity) => {
   return {
     type: DEITY_ADDED,
     payload: deity,
+  };
+};
+
+export const getSkills = () => {
+  const options = {
+    method: "GET",
+    url: "http://localhost:2000/skills",
+  };
+  return async function (dispatch) {
+    const res = await Axios(options);
+    console.log("it ran");
+    dispatch({ type: SKILLS_RECIEVED, payload: res.data });
   };
 };
 

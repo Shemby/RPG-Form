@@ -7,7 +7,6 @@ import {
   DAMAGED,
   RESET,
   SR_SET,
-  SKILLS_RECIEVED,
   RANK_CHANGED,
   MISC_CHANGED,
 } from "../actions/types";
@@ -80,11 +79,6 @@ const sheetReducer = (state = initialState, action) => {
           ...state.sheet,
           sr: action.payload,
         },
-      };
-    case SKILLS_RECIEVED:
-      return {
-        ...state,
-        skills: action.payload,
       };
     case RANK_CHANGED:
       const skillIndex = state.skills

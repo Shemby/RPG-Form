@@ -43,6 +43,13 @@ class Nav extends Component {
           value={6}
           onClick={() => this.props.changeStep(6)}
         >
+          Skills
+        </button>
+        <button
+          className="btn-link"
+          value={7}
+          onClick={() => this.props.changeStep(7)}
+        >
           Review
         </button>
       </nav>

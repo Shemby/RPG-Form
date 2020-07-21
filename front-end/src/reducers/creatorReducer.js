@@ -23,6 +23,7 @@ import {
   ALIGNMENT_ADDED,
   ALIGNMENT_REMOVED,
   SHEET_CREATED,
+  SKILLS_RECIEVED,
   HP_CHANGED,
 } from "../actions/types";
 
@@ -39,7 +40,7 @@ const initialState = {
       wis: 8,
       cha: 8,
     },
-    skills: {},
+    skills: [],
     feats: {},
     hp: "",
     domains: [],
@@ -292,6 +293,14 @@ const creatorReducer = (state = initialState, action) => {
               ...state.character.equipment.weapons.slice(weaponIndex + 1),
             ],
           },
+        },
+      };
+    case SKILLS_RECIEVED:
+      return {
+        ...state,
+        character: {
+          ...state.character,
+          skills: action.payload,
         },
       };
     case SHEET_CREATED:
